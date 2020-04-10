@@ -24,7 +24,6 @@ class App {
     }
 
     private mongoSetup() {
-        mongoose.Promise = global.Promise;
         mongoose.connect(this.mongoUrl);
     }
 

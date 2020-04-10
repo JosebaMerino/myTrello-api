@@ -28,20 +28,36 @@ export class DedicationController implements IBasicController {
     }
     public update(req: Request, res: Response) {
         let data: IDedication = req.body;
-        data.modificationDate = Date.now();
 
-        Dedication.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, dedication) => {
+
+        Dedication.findOneAndUpdate(
+            { _id: req.params.id },
+            req.body,
+            { new: true },
+            (err, dedication) => {
+                if(err) {
+                    res.send(err);
+                }
+                res.json(dedication);
+        });
+    }
+    public delete(req: Request, res: Response) {
+        Dedication.remove({ _id: req.params.id }, (err) => {
+            if(err) {
+                res.send(err);
+            }
+            res.json({ msg: 'Deleted succesfully' });
+        });
+    }
+    public add(req: Request, res: Response) {
+        let newDedication = new Dedication(req.body);
+
+        newDedication.save((err, dedication) => {
             if(err) {
                 res.send(err);
             }
             res.json(dedication);
         });
-    }
-    public delete(req: Request, res: Response) {
-        Dedication.remove
-    }
-    public add(req: Request, res: Response) {
-        throw new Error("Method not implemented.");
     }
 
 }
