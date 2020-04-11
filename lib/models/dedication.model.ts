@@ -1,5 +1,6 @@
 import { Metadata } from './metadata.model';
-import mongoose, { Schema, Document} from 'mongoose';
+import { Schema, Document} from 'mongoose';
+import * as mongoose from 'mongoose';
 
 export interface IDedication extends Document, Metadata {
     startDate: Date;
