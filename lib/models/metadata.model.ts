@@ -1,5 +1,5 @@
 export class Metadata {
-    creationDate: Date;
-    modificationDate: Date;
-    deletionDate: Date;
+  creationDate: Date;
+  modificationDate: Date;
+  deletionDate: Date;
 }
