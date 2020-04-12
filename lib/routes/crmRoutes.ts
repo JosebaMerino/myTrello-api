@@ -29,16 +29,6 @@ export class Routes {
       .put(this.contactController.updateContact)
       .delete(this.contactController.deleteContact);
 
-    // Dedication
-
-    app.route('/dedication')
-      .get(this.dedicationController.getAll)
-      .post(this.dedicationController.add);
-
-    app.route('/dedication/:id')
-      .get(this.dedicationController.getById)
-      .put(this.dedicationController.update)
-      .delete(this.dedicationController.delete);
 
   }
 }

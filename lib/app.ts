@@ -3,17 +3,21 @@ import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
 
 import { Routes } from './routes/crmRoutes';
+import { DedicationRoutes } from './routes/dedication.routes';
 
 class App {
 
   public app: express.Application;
   public routePrv: Routes = new Routes();
+  public dedicationRoutes: DedicationRoutes = new DedicationRoutes();
+
   public mongoUrl: string = 'mongodb://localhost/CRMdb';
 
   constructor() {
     this.app = express();
     this.config();
     this.routePrv.routes(this.app);
+    this.dedicationRoutes.routes(this.app);
     this.mongoSetup();
   }
 
