@@ -7,9 +7,6 @@ export interface IDedication extends Document, Metadata {
   endDate?: Date;
 }
 
-/**
- * Dale
- */
 export let DedicationSchema : Schema = new Schema({
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: false },

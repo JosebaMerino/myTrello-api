@@ -1,4 +1,4 @@
-export class Metadata {
+export class Metadata extends Document{
   creationDate: Date;
   modificationDate: Date;
   deletionDate: Date;
