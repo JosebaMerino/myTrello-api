@@ -2,6 +2,8 @@ import { Metadata } from './metadata.model';
 import { Schema, Document } from 'mongoose';
 import * as mongoose from 'mongoose';
 
+import { IDedication } from './dedication.model';
+
 export interface ICardBase extends Document, Metadata {
   name: string;
   description?: string;
@@ -10,9 +12,12 @@ export interface ICardBase extends Document, Metadata {
 }
 
 export interface ICard extends ICardBase {
-  dedications: [Schema.Types.ObjectId];
+  dedications: (IDedication['_id'])[];
 }
 
+export interface ICardPopulated extends ICardBase {
+  dedications: IDedication[];
+}
 
 export let CardSchema: Schema = new Schema({
   name: { type: String },
@@ -22,6 +27,10 @@ export let CardSchema: Schema = new Schema({
   creationDate: { type: Date, default: Date.now },
   modificationDate: { type: Date, required: false },
   deletionDate: { type: Date, required: false },
+  dedications: [{ type: Schema.Types.ObjectId, ref: 'Dedication' }],
 });
 
-export default mongoose.model<ICard>('Card', CardSchema);
+/**
+ * Un | en los tipos significa que puede ser de un tipo o del otro.
+ */
+export default mongoose.model<ICard | ICardPopulated>('Card', CardSchema);
