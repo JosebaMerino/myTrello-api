@@ -4,12 +4,14 @@ import * as mongoose from 'mongoose';
 
 import { Routes } from './routes/crmRoutes';
 import { DedicationRoutes } from './routes/dedication.routes';
+import { CardRoutes } from './routes/card.routes';
 
 class App {
 
   public app: express.Application;
   public routePrv: Routes = new Routes();
   public dedicationRoutes: DedicationRoutes = new DedicationRoutes();
+  public cardRoutes: CardRoutes = new CardRoutes();
 
   public mongoUrl: string = 'mongodb://localhost/CRMdb';
 
@@ -18,6 +20,7 @@ class App {
     this.config();
     this.routePrv.routes(this.app);
     this.dedicationRoutes.routes(this.app);
+    this.cardRoutes.routes(this.app);
     this.mongoSetup();
   }
 

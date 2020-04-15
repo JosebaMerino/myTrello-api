@@ -8,20 +8,20 @@ import { DedicationSchema, IDedication } from '../models/dedication.model';
 const Dedication = mongoose.model<IDedication>('Dedication', DedicationSchema);
 
 export class DedicationController implements IBasicController {
-  public getById(req: Request, res: Response) {
-    Dedication.findById(req.params.id, (err, dedication) => {
-      if (err) {
-        res.send(err);
-      }
-      res.json(dedication);
-    });
-  }
   public getAll(req: Request, res: Response) {
     Dedication.find({}, (err, dedications) => {
       if (err) {
         res.send(err);
       }
       res.json(dedications);
+    });
+  }
+  public getById(req: Request, res: Response) {
+    Dedication.findById(req.params.id, (err, dedication) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(dedication);
     });
   }
   public update(req: Request, res: Response) {
