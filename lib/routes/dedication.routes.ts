@@ -2,8 +2,10 @@ import { Request, Response } from 'express';
 
 import { DedicationController } from '../controllers/dedication.controller';
 
+import { DedicationController2 } from '../controllers/dedication2.controller';
+
 export class DedicationRoutes {
-  public dedicationController: DedicationController = new DedicationController();
+  public dedicationController: DedicationController2 = new DedicationController2();
 
   public routes(app): void {
     app.route('/dedication')

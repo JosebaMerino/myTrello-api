@@ -1,17 +1,14 @@
 import { Request, Response } from 'express';
 import * as mongoose from 'mongoose';
+import * as Common from './common';
 
 import { IBasicController } from './basicController.interface';
 
-import { DedicationSchema, IDedication } from '../models/dedication.model';
+let Model;
 
-import * as Common from './common';
-
-let Dedication;
-
-export class DedicationController implements IBasicController {
-  constructor() {
-    Dedication = mongoose.model<IDedication>('Dedication', DedicationSchema);
+export class GenericController<T extends mongoose.Document> implements IBasicController {
+  constructor(name: string, schema: mongoose.Schema) {
+    Model = mongoose.model<T>(name, schema);
   }
   public getAll(req: Request, res: Response) {
     // Para buscar solo los que no estan borrados
@@ -24,7 +21,7 @@ export class DedicationController implements IBasicController {
       searchCondition = Common.onlyNotDeleted;
     }
     console.log(searchCondition);
-    Dedication.find(searchCondition, (err, dedications) => {
+    Model.find(searchCondition, (err, dedications) => {
       if (err) {
         res.send(err);
       }
@@ -32,7 +29,7 @@ export class DedicationController implements IBasicController {
     });
   }
   public getById(req: Request, res: Response) {
-    Dedication.findById(req.params.id, (err, dedication) => {
+    Model.findById(req.params.id, (err, dedication) => {
       if (err) {
         res.send(err);
       }
@@ -40,13 +37,10 @@ export class DedicationController implements IBasicController {
     });
   }
   public update(req: Request, res: Response) {
-    const data: IDedication = req.body;
 
-    data.modificationDate = new Date();
-
-    Dedication.findOneAndUpdate(
+    Model.findOneAndUpdate(
             { _id: req.params.id },
-            data,
+            req.body,
             { new: true },
             (err, dedication) => {
               if (err) {
@@ -58,7 +52,7 @@ export class DedicationController implements IBasicController {
   public delete(req: Request, res: Response) {
     // Hace un borrado logico
     // It makes a logic delete
-    Dedication.updateOne({ _id: req.params.id}, { deletionDate: new Date() }, (err) => {
+    Model.updateOne({ _id: req.params.id}, { deletionDate: new Date() }, (err) => {
       if (err) {
         res.send(err);
       } else {
@@ -75,7 +69,7 @@ export class DedicationController implements IBasicController {
     */
   }
   public add(req: Request, res: Response) {
-    const newDedication = new Dedication(req.body);
+    const newDedication = new Model(req.body);
 
     newDedication.save((err, dedication) => {
       if (err) {
@@ -84,5 +78,4 @@ export class DedicationController implements IBasicController {
       res.json(dedication);
     });
   }
-
 }
