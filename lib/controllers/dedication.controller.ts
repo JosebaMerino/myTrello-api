@@ -9,7 +9,11 @@ const Dedication = mongoose.model<IDedication>('Dedication', DedicationSchema);
 
 export class DedicationController implements IBasicController {
   public getAll(req: Request, res: Response) {
-    Dedication.find({}, (err, dedications) => {
+    // Para buscar solo los que no estan borrados
+
+    
+    // Dedication.find({ deletionDate: undefined }, (err, dedications) => {
+    Dedication.find({ }, (err, dedications) => {
       if (err) {
         res.send(err);
       }
@@ -41,12 +45,23 @@ export class DedicationController implements IBasicController {
             });
   }
   public delete(req: Request, res: Response) {
+    // Hace un borrado logico
+    // It makes a logic delete
+    Dedication.updateOne({ _id: req.params.id}, { deletionDate: new Date() }, (err) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send({ msg: 'Deleted succesfully!' });
+      }
+    });
+    /*
     Dedication.remove({ _id: req.params.id }, (err) => {
       if (err) {
         res.send(err);
       }
       res.json({ msg: 'Deleted succesfully' });
     });
+    */
   }
   public add(req: Request, res: Response) {
     const newDedication = new Dedication(req.body);

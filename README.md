@@ -21,3 +21,6 @@ https://medium.com/@tomanagle/strongly-typed-models-with-mongoose-and-typescript
 
 De interes:
 https://medium.com/@agentwhs/complete-guide-for-typescript-for-mongoose-for-node-js-8cc0a7e470c1
+
+Patron seguido para borrar:
+https://medium.com/biodati/rest-api-deletion-pattern-4eb8b0dafbce
