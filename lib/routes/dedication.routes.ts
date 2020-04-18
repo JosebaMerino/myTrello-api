@@ -1,7 +1,3 @@
-import { Request, Response } from 'express';
-
-import { DedicationController } from '../controllers/dedication.controller';
-
 import { DedicationController2 } from '../controllers/dedication2.controller';
 
 export class DedicationRoutes {
