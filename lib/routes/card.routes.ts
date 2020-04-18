@@ -1,6 +1,4 @@
-import { Request, Response } from 'express';
-
-import { CardController } from '../controllers/card.controller';
+import { CardController } from '../controllers/card2.controller';
 
 export class CardRoutes {
   public cardController: CardController = new CardController();
