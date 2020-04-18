@@ -1,10 +1,10 @@
-import { Metadata } from './metadata.model';
+import { IMetadata } from './metadata.model';
 import { Schema, Document } from 'mongoose';
 import * as mongoose from 'mongoose';
 
 import { IDedication } from './dedication.model';
 
-export interface ICardBase extends Document, Metadata {
+export interface ICardBase extends Document, IMetadata {
   name: string;
   description?: string;
   color?: string;
