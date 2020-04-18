@@ -2,11 +2,13 @@ import { Request, Response } from 'express';
 import * as mongoose from 'mongoose';
 import * as Common from './common';
 
+import { IMetadata } from '../models/metadata.model';
+
 import { IBasicController } from './basicController.interface';
 
 let Model;
 
-export class GenericController<T extends mongoose.Document> implements IBasicController {
+export class GenericController<T extends mongoose.Document & IMetadata> implements IBasicController {
   constructor(name: string, schema: mongoose.Schema) {
     Model = mongoose.model<T>(name, schema);
   }
@@ -37,10 +39,14 @@ export class GenericController<T extends mongoose.Document> implements IBasicCon
     });
   }
   public update(req: Request, res: Response) {
+    
+    let body : T = req.body;
+
+    body.modificationDate = new Date();
 
     Model.findOneAndUpdate(
             { _id: req.params.id },
-            req.body,
+            body,
             { new: true },
             (err, dedication) => {
               if (err) {
