@@ -1,5 +1,2 @@
-export class Common {
-  onlyNotDeleted: { deletionDate: undefined };
-  all: {};
-
-}
+export const onlyNotDeleted = { deletionDate: undefined };
+export const all = {};

@@ -5,10 +5,9 @@ import { IBasicController } from './basicController.interface';
 
 import { DedicationSchema, IDedication } from '../models/dedication.model';
 
-import { Common } from './common';
+import * as Common from './common';
 
 const Dedication = mongoose.model<IDedication>('Dedication', DedicationSchema);
-const common = new Common();
 
 export class DedicationController implements IBasicController {
   public getAll(req: Request, res: Response) {
@@ -17,9 +16,9 @@ export class DedicationController implements IBasicController {
     let searchCondition;
 
     if (all === true) {
-      searchCondition = common.all;
+      searchCondition = Common.all;
     } else {
-      searchCondition = common.onlyNotDeleted;
+      searchCondition = Common.onlyNotDeleted;
     }
     console.log(searchCondition);
     Dedication.find(searchCondition, (err, dedications) => {
