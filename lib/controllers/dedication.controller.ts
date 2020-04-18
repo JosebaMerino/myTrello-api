@@ -5,15 +5,24 @@ import { IBasicController } from './basicController.interface';
 
 import { DedicationSchema, IDedication } from '../models/dedication.model';
 
+import { Common } from './common';
+
 const Dedication = mongoose.model<IDedication>('Dedication', DedicationSchema);
+const common = new Common();
 
 export class DedicationController implements IBasicController {
   public getAll(req: Request, res: Response) {
     // Para buscar solo los que no estan borrados
+    const all = req.body.all;
+    let searchCondition;
 
-    
-    // Dedication.find({ deletionDate: undefined }, (err, dedications) => {
-    Dedication.find({ }, (err, dedications) => {
+    if (all === true) {
+      searchCondition = common.all;
+    } else {
+      searchCondition = common.onlyNotDeleted;
+    }
+    console.log(searchCondition);
+    Dedication.find(searchCondition, (err, dedications) => {
       if (err) {
         res.send(err);
       }
