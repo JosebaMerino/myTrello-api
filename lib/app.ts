@@ -6,9 +6,9 @@ import { Routes } from './routes/crmRoutes';
 import { DedicationRoutes } from './routes/dedication.routes';
 import { CardRoutes } from './routes/card.routes';
 
-let morgan = require('morgan');
+const morgan = require('morgan');
 class App {
-  
+
   public app: express.Application;
   public routePrv: Routes = new Routes();
   public dedicationRoutes: DedicationRoutes = new DedicationRoutes();

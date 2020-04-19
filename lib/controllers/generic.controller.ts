@@ -6,11 +6,11 @@ import { IMetadata } from '../models/metadata.model';
 
 import { IBasicController } from './basicController.interface';
 
-let Model;
+let model;
 
 export class GenericController<T extends mongoose.Document & IMetadata> implements IBasicController {
   constructor(name: string, schema: mongoose.Schema) {
-    Model = mongoose.model<T>(name, schema);
+    model = mongoose.model<T>(name, schema);
   }
   public getAll(req: Request, res: Response) {
     // Para buscar solo los que no estan borrados
@@ -23,7 +23,7 @@ export class GenericController<T extends mongoose.Document & IMetadata> implemen
       searchCondition = Common.onlyNotDeleted;
     }
     console.log(searchCondition);
-    Model.find(searchCondition, (err, dedications) => {
+    model.find(searchCondition, (err, dedications) => {
       if (err) {
         res.send(err);
       }
@@ -31,7 +31,7 @@ export class GenericController<T extends mongoose.Document & IMetadata> implemen
     });
   }
   public getById(req: Request, res: Response) {
-    Model.findById(req.params.id, (err, dedication) => {
+    model.findById(req.params.id, (err, dedication) => {
       if (err) {
         res.send(err);
       }
@@ -39,12 +39,12 @@ export class GenericController<T extends mongoose.Document & IMetadata> implemen
     });
   }
   public update(req: Request, res: Response) {
-    
-    let body : T = req.body;
+
+    const body : T = req.body;
 
     body.modificationDate = new Date();
 
-    Model.findOneAndUpdate(
+    model.findOneAndUpdate(
             { _id: req.params.id },
             body,
             { new: true },
@@ -58,7 +58,7 @@ export class GenericController<T extends mongoose.Document & IMetadata> implemen
   public delete(req: Request, res: Response) {
     // Hace un borrado logico
     // It makes a logic delete
-    Model.updateOne({ _id: req.params.id}, { deletionDate: new Date() }, (err) => {
+    model.updateOne({ _id: req.params.id }, { deletionDate: new Date() }, (err) => {
       if (err) {
         res.send(err);
       } else {
@@ -75,7 +75,7 @@ export class GenericController<T extends mongoose.Document & IMetadata> implemen
     */
   }
   public add(req: Request, res: Response) {
-    const newDedication = new Model(req.body);
+    const newDedication = new model(req.body);
 
     newDedication.save((err, dedication) => {
       if (err) {
