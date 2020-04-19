@@ -4,6 +4,8 @@ import * as mongoose from 'mongoose';
 
 import { IDedication } from './dedication.model';
 
+export const modelName : string = 'Card';
+
 export interface ICardBase extends Document, IMetadata {
   name: string;
   description?: string;
@@ -33,4 +35,4 @@ export let CardSchema: Schema = new Schema({
 /**
  * Un | en los tipos significa que puede ser de un tipo o del otro.
  */
-export default mongoose.model<ICard | ICardPopulated>('Card', CardSchema);
+export default mongoose.model<ICard | ICardPopulated>(modelName, CardSchema);

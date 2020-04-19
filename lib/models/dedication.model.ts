@@ -2,6 +2,8 @@ import { IMetadata } from './metadata.model';
 import { Schema, Document } from 'mongoose';
 import * as mongoose from 'mongoose';
 
+export const modelName: string = 'Dedication';
+
 export interface IDedication extends Document, IMetadata {
   startDate: Date;
   endDate?: Date;
@@ -22,4 +24,4 @@ DedicationSchema.pre('findOneAndUpdate', (next) => {
   next();
 });
 
-export default mongoose.model<IDedication>('Dedication', DedicationSchema);
+export default mongoose.model<IDedication>(modelName, DedicationSchema);
