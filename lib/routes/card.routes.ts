@@ -1,4 +1,4 @@
-import { CardController } from '../controllers/card2.controller';
+import { CardController } from '../controllers/card.controller';
 
 export class CardRoutes {
   public cardController: CardController = new CardController();

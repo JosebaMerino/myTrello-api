@@ -5,9 +5,7 @@ import { GenericController } from './generic.controller';
 
 import { DedicationSchema, IDedication } from '../models/dedication.model';
 
-let Dedication;
-
-export class DedicationController2 extends GenericController<IDedication> {
+export class DedicationController extends GenericController<IDedication> {
   constructor() {
     super('Dedication', DedicationSchema);
   }

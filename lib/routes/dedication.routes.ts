@@ -1,7 +1,7 @@
-import { DedicationController2 } from '../controllers/dedication2.controller';
+import { DedicationController } from '../controllers/dedication.controller';
 
 export class DedicationRoutes {
-  public dedicationController: DedicationController2 = new DedicationController2();
+  public dedicationController: DedicationController = new DedicationController();
 
   public routes(app): void {
     app.route('/dedication')
