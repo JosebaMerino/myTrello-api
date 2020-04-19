@@ -4,6 +4,7 @@ export class DedicationRoutes {
   public dedicationController: DedicationController = new DedicationController();
 
   public routes(app): void {
+
     app.route('/dedication')
     .get(this.dedicationController.getAll)
     .post(this.dedicationController.add);

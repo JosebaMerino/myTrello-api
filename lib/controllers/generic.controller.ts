@@ -6,19 +6,24 @@ import { IMetadata } from '../models/metadata.model';
 
 import { IBasicController } from './basicController.interface';
 
-let model;
-
-export abstract class GenericController<T extends mongoose.Document & IMetadata> implements IBasicController {
+export class GenericController<T extends mongoose.Document & IMetadata> implements IBasicController {
+  public model;
   constructor(name: string, schema: mongoose.Schema) {
-    model = mongoose.model<T>(name, schema);
+    this.model = mongoose.model<T>(name, schema);
   }
 
   public getModel() {
-    return model;
+    return this.model;
   }
 
-  public getAll(req: Request, res: Response) {
-    console.log(model);
+  public test = (req: Request, res: Response) => {
+    console.log(this)
+    console.log(this.model);
+    res.json(this.model);
+  }
+
+  public getAll = (req: Request, res: Response) => {
+   // console.log(this.model);
     // Para buscar solo los que no estan borrados
     const all = req.body.all;
     let searchCondition;
@@ -29,28 +34,28 @@ export abstract class GenericController<T extends mongoose.Document & IMetadata>
       searchCondition = Common.onlyNotDeleted;
     }
     console.log(searchCondition);
-    model.find(searchCondition, (err, dedications) => {
+    this.model.find(searchCondition, (err, dedications) => {
       if (err) {
         res.send(err);
       }
       res.json(dedications);
     });
   }
-  public getById(req: Request, res: Response) {
-    model.findById(req.params.id, (err, dedication) => {
+  public getById = (req: Request, res: Response) => {
+    this.model.findById(req.params.id, (err, dedication) => {
       if (err) {
         res.send(err);
       }
       res.json(dedication);
     });
   }
-  public update(req: Request, res: Response) {
+  public update = (req: Request, res: Response) => {
 
     const body : T = req.body;
 
     body.modificationDate = new Date();
 
-    model.findOneAndUpdate(
+    this.model.findOneAndUpdate(
             { _id: req.params.id },
             body,
             { new: true },
@@ -61,10 +66,10 @@ export abstract class GenericController<T extends mongoose.Document & IMetadata>
               res.json(dedication);
             });
   }
-  public delete(req: Request, res: Response) {
+  public delete = (req: Request, res: Response) => {
     // Hace un borrado logico
     // It makes a logic delete
-    model.updateOne({ _id: req.params.id }, { deletionDate: new Date() }, (err) => {
+    this.model.updateOne({ _id: req.params.id }, { deletionDate: new Date() }, (err) => {
       if (err) {
         res.send(err);
       } else {
@@ -80,8 +85,8 @@ export abstract class GenericController<T extends mongoose.Document & IMetadata>
     });
     */
   }
-  public add(req: Request, res: Response) {
-    const newDedication = new model(req.body);
+  public add = (req: Request, res: Response) => {
+    const newDedication = new this.model(req.body);
 
     newDedication.save((err, dedication) => {
       if (err) {
