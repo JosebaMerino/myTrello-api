@@ -8,11 +8,17 @@ import { IBasicController } from './basicController.interface';
 
 let model;
 
-export class GenericController<T extends mongoose.Document & IMetadata> implements IBasicController {
+export abstract class GenericController<T extends mongoose.Document & IMetadata> implements IBasicController {
   constructor(name: string, schema: mongoose.Schema) {
     model = mongoose.model<T>(name, schema);
   }
+
+  public getModel() {
+    return model;
+  }
+
   public getAll(req: Request, res: Response) {
+    console.log(model);
     // Para buscar solo los que no estan borrados
     const all = req.body.all;
     let searchCondition;

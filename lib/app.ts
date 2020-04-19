@@ -11,8 +11,8 @@ class App {
 
   public app: express.Application;
   public routePrv: Routes = new Routes();
-  public dedicationRoutes: DedicationRoutes = new DedicationRoutes();
   public cardRoutes: CardRoutes = new CardRoutes();
+  public dedicationRoutes: DedicationRoutes = new DedicationRoutes();
 
   public mongoUrl: string = 'mongodb://localhost/CRMdb';
 

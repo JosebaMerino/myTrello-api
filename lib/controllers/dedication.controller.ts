@@ -4,6 +4,7 @@ import { DedicationSchema, IDedication, modelName } from '../models/dedication.m
 
 export class DedicationController extends GenericController<IDedication> {
   constructor() {
-    super(modelName, DedicationSchema);
+    super('Dedication', DedicationSchema);
+    console.log('trzace');
   }
 }
