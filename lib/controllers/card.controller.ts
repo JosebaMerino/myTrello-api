@@ -13,6 +13,10 @@ export class CardController extends GenericController<ICard | ICardPopulated> {
     cardModel = super.getModel();
   }
 
+  getById(req: Request, res:Response) {
+    super.getById(req, res);
+  }
+
   getByIdAndPopulate(req: Request, res: Response) {
     const populate = req.query.populate;
     console.log('hi');
