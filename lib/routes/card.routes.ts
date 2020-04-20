@@ -9,13 +9,9 @@ export class CardRoutes {
     .get(this.cardController.getAll)
     .post(this.cardController.add);
 
-    
     app.route('/card/:id')
-    .get(this.cardController.getById)
+    .get(this.cardController.getByIDHandler)
     .put(this.cardController.update)
     .delete(this.cardController.delete);
-    
-    app.route('/card/:id?')
-    .get(this.cardController.getByIdAndPopulate);
   }
 }

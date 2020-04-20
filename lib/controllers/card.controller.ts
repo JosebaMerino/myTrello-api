@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 import { GenericController } from './generic.controller';
 
@@ -13,24 +13,33 @@ export class CardController extends GenericController<ICard | ICardPopulated> {
     cardModel = super.getModel();
   }
 
-  getById(req: Request, res:Response) {
-    super.getById(req, res);
+  getByIdAndPopulate(req: Request, res: Response) {
+    cardModel
+      .findById(req.params.id)
+      .populate('dedications')
+      .exec((err, card) => {
+        if (err) {
+          res.send(err);
+        } else {
+          res.status(200).json(card);
+        }
+      });
   }
 
-  getByIdAndPopulate(req: Request, res: Response) {
-    const populate = req.query.populate;
-    console.log('hi');
+  /* Router Handlers
+  */
+
+  /**
+   * This router handler, handles getById and depending if the query parameter
+   * "populate" is true or false, calls one handler or another.
+   */
+  getByIDHandler = (req: Request, res: Response) => {
+    const populate: Boolean = Boolean(JSON.parse(req.query.populate));
     if (populate) {
-      cardModel
-        .findById(req.params.id)
-        .populate('dedications')
-        .exec((err, card) => {
-          if (err) {
-            res.send(err);
-          } else {
-            res.status(200).json(card);
-          }
-        });
+      console.log('Populated');
+      this.getByIdAndPopulate(req, res);
+    } else {
+      this.getById(req, res);
     }
   }
 }
