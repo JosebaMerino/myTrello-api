@@ -76,6 +76,9 @@ https://medium.com/biodati/rest-api-deletion-pattern-4eb8b0dafbce
 Como obtener los elementos borrados
 https://laravel-json-api.readthedocs.io/en/latest/features/soft-deletes/
 
+Cuales son los operadores de queries de MongoDB:
+https://docs.mongodb.com/manual/reference/operator/query-logical/
+
 
 
 Para otra vez va? Es demasiado para lo que quieres hacer

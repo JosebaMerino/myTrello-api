@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, query } from 'express';
 import * as mongoose from 'mongoose';
 import * as Common from './common';
 
@@ -25,15 +25,28 @@ export class GenericController<T extends mongoose.Document & IMetadata> implemen
   public getAll = (req: Request, res: Response) => {
    // console.log(this.model);
     // Para buscar solo los que no estan borrados
-    const all = req.body.all;
     let searchCondition;
 
+    const queryParameters = req.query;
+
+    if (this.booleanParser(queryParameters.onlyDeleted)) {
+      searchCondition = Common.onlyDeleted;
+      console.log('Only deleted');
+    } else if (this.booleanParser(queryParameters.all)) {
+      searchCondition = Common.all;
+      console.log('All');
+    } else {
+      console.log('Only not deleted');
+      searchCondition = Common.onlyNotDeleted;
+    }
+
+    console.log(searchCondition);
+    /*
     if (all === true) {
       searchCondition = Common.all;
     } else {
       searchCondition = Common.onlyNotDeleted;
-    }
-    console.log(searchCondition);
+    }*/
     this.model.find(searchCondition, (err, dedications) => {
       if (err) {
         res.send(err);
@@ -94,5 +107,23 @@ export class GenericController<T extends mongoose.Document & IMetadata> implemen
       }
       res.json(dedication);
     });
+  }
+
+  /**
+   * Casts a string to a boolean
+   * @returns boolean. null if it can't cast
+   */
+  private booleanParser = (param: string) => {
+    let resul: boolean;
+    if (param && param.match(/^((true)|(false))$/)) {
+      console.log('MATCHES');
+      resul = Boolean(JSON.parse(param));
+      console.log({ resul });
+    } else {
+      console.log('Not MATCHES');
+      resul = null;
+    }
+
+    return resul;
   }
 }
