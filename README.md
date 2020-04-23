@@ -11,17 +11,47 @@ Sino como lo podemos hacer? Haciendo post a ` /dedication ` y pasandole el id? E
 
 A si, al borrar una dedicacion habra que actualizar la lista de la card correspondiente.
 
+## PUT vs PATCH
+PUT   - Actualización total del recurso (lo machaca completamente)
+PATCH - Actualización parcial del recurso (se actualiza parcialmente)
 ## URLS
+
+
+
 
 Las URLS de la API, se ha decidido que se harán de la siguiente manera:
 ```
-GET /recurso -> Obtiene todos los recursos
-GET /recurso?deleted=false -> Obtiene los recursos no borrados
-GET /recurso?deleted=true -> Obtiene los recursos borrados
+GET /recurso -> Obtiene los recursos no borrados
+GET /recurso?onlyDeleted=true -> Obtiene todos los recursos borrados
+GET /recurso?all=true -> Obtiene los recursos (borrados y no borrados)
+
+POST /recurso -> Crea un nuevo recurso
 ```
 ```
-GET /recurso/:id -> Obtiene el recurso especifico que no esté borrado
-GET /recurso/:id?deleted=false -> Obtiene el recurso si no esta borrado
+GET /recurso/:id -> Obtiene el recurso especifico (no borrado)
+GET /recurso/:id?all=true -> Obtiene el recurso esté o no borrado
+
+
+PUT /recurso/:id -> Actualiza el recurso (que no esté borrado)
+PUT /recurso/:id?all=true -> Actualiza el recurso esté o no borrado
+
+PATCH /recurso/:id -> Actualiza parcialmente el recurso (que no esté borrado)
+PATCH /recurso/:id?all=true -> Actualiza parcialmente el recurso esté o no borrado
+
+DELETE /recurso/:id -> Realiza un borrado logico del recurso 
+DELETE /recurso/:id?sure=true -> Realiza el borrado fisico del recurso (siempre que ya este marcado como borrado)
+```
+
+Recursos anidados
+```
+GET /recurso/:id/recursoAnidado -> Devuelve el recurso anidado o lista de recursos anidados poblada.
+POST /recurso/:id/recursoAnidado -> Crea el recurso y lo añade
+PUT /recurso/:id/recursoAnidado/
+```
+
+
+```
+GET /recu
 ```
 
 ## Morgan (JS)
