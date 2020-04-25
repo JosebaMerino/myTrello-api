@@ -49,11 +49,6 @@ POST /recurso/:id/recursoAnidado -> Crea el recurso y lo añade
 PUT /recurso/:id/recursoAnidado/
 ```
 
-
-```
-GET /recu
-```
-
 ## Morgan (JS)
 Morgan JS es un middleware que sirve para interceptar las `responses` de la aplicación y las loguea por pantalla. No es que sirva de mucho ahora mismo pero en un futuro cuando este en el servidor servirá para logear las peticiones y ver si ha habido algun fallo de tipo 500.
 
@@ -67,7 +62,7 @@ https://itnext.io/building-restful-web-apis-with-node-js-express-mongodb-and-typ
 Tutorial seguido para Mongoose & Typescript
 https://medium.com/@tomanagle/strongly-typed-models-with-mongoose-and-typescript-7bc2f7197722
 
-De interes:
+Typescript & Mongoose:
 https://medium.com/@agentwhs/complete-guide-for-typescript-for-mongoose-for-node-js-8cc0a7e470c1
 
 Patron seguido para borrar:
@@ -76,7 +71,7 @@ https://medium.com/biodati/rest-api-deletion-pattern-4eb8b0dafbce
 Como obtener los elementos borrados
 https://laravel-json-api.readthedocs.io/en/latest/features/soft-deletes/
 
-Cuales son los operadores de queries de MongoDB:
+Cuales son los operadores de queries de MongoDB (Tambien de mongoose):
 https://docs.mongodb.com/manual/reference/operator/query-logical/
 
 

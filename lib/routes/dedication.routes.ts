@@ -11,6 +11,7 @@ export class DedicationRoutes {
 
     app.route('/dedication/:id')
     .get(this.dedicationController.getById)
+    .patch(this.dedicationController.patch)
     .put(this.dedicationController.update)
     .delete(this.dedicationController.delete);
   }

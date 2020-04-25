@@ -10,6 +10,7 @@ export interface IBasicController {
   add(req: Request, res: Response);
 
   update(req: Request, res: Response);
+  patch(req: Request, res: Response);
 
   delete(req: Request, res: Response);
 

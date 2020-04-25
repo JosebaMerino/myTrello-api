@@ -62,7 +62,35 @@ export class GenericController<T extends mongoose.Document & IMetadata> implemen
       res.json(dedication);
     });
   }
+
   public update = (req: Request, res: Response) => {
+    const body : T = req.body;
+
+    body.modificationDate = new Date();
+
+    this.model.findById(req.params.id, (err, dedication) => {
+      if (err) {
+        res.send(err);
+      } else {
+        body.creationDate = dedication.creationDate;
+        body.deletionDate = dedication.deletionDate;
+        this.model.findOneAndReplace(
+          { _id: req.params.id },
+          body,
+          { new: true },
+          (err, dedication: T) => {
+            if (err) {
+              res.send(err);
+            } else {
+              res.json(dedication);
+            }
+          },
+          );
+      }
+    });
+  }
+
+  public patch = (req: Request, res: Response) => {
 
     const body : T = req.body;
 
