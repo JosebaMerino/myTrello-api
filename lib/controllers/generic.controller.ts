@@ -97,15 +97,15 @@ export class GenericController<T extends mongoose.Document & IMetadata> implemen
     body.modificationDate = new Date();
 
     this.model.findOneAndUpdate(
-            { _id: req.params.id },
-            body,
-            { new: true },
-            (err, dedication) => {
-              if (err) {
-                res.send(err);
-              }
-              res.json(dedication);
-            });
+      { _id: req.params.id },
+      body,
+      { new: true },
+      (err, dedication) => {
+        if (err) {
+          res.send(err);
+        }
+        res.json(dedication);
+      });
   }
   public delete = (req: Request, res: Response) => {
     // Hace un borrado logico
