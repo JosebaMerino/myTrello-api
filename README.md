@@ -46,7 +46,8 @@ Recursos anidados
 ```
 GET /recurso/:id/recursoAnidado -> Devuelve el recurso anidado o lista de recursos anidados poblada.
 POST /recurso/:id/recursoAnidado -> Crea el recurso y lo añade
-PUT /recurso/:id/recursoAnidado/
+DELETE /recurso/:id/recursoAnidado/:id -> Borra de forma logica el recurso anidado (se guarda la relación)
+DELETE /recurso/:id/recursoAnidado/:id?sure=true -> Realiza un borrado fisico del recurso anidado (borrando tambien la relación) .
 ```
 
 ## Morgan (JS)
