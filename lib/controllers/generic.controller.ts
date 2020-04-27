@@ -108,23 +108,33 @@ export class GenericController<T extends mongoose.Document & IMetadata> implemen
       });
   }
   public delete = (req: Request, res: Response) => {
-    // Hace un borrado logico
-    // It makes a logic delete
-    this.model.updateOne({ _id: req.params.id }, { deletionDate: new Date() }, (err) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send({ msg: 'Deleted succesfully!' });
-      }
-    });
-    /*
-    Dedication.remove({ _id: req.params.id }, (err) => {
-      if (err) {
-        res.send(err);
-      }
-      res.json({ msg: 'Deleted succesfully' });
-    });
-    */
+
+    let fisicalDelete: Boolean = false;
+
+    if (req.query.fisical) {
+      fisicalDelete = Boolean(JSON.parse(req.query.fisical));
+    }
+
+    if (fisicalDelete) {
+      // Hace un borrado fisico
+      // It makes a fisical delete
+      this.model.remove({ _id: req.params.id }, (err) => {
+        if (err) {
+          res.send(err);
+        }
+        res.json({ msg: 'Deleted succesfully forever!' });
+      });
+    } else {
+      // Hace un borrado logico
+      // It makes a logic delete
+      this.model.updateOne({ _id: req.params.id }, { deletionDate: new Date() }, (err) => {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send({ msg: 'Deleted succesfully!' });
+        }
+      });
+    }
   }
   public add = (req: Request, res: Response) => {
     const newDedication = new this.model(req.body);

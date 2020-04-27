@@ -39,7 +39,7 @@ PATCH /recurso/:id -> Actualiza parcialmente el recurso (que no esté borrado)
 PATCH /recurso/:id?all=true -> Actualiza parcialmente el recurso esté o no borrado
 
 DELETE /recurso/:id -> Realiza un borrado logico del recurso 
-DELETE /recurso/:id?sure=true -> Realiza el borrado fisico del recurso (siempre que ya este marcado como borrado)
+DELETE /recurso/:id?fisical=true -> Realiza el borrado fisico del recurso (siempre que ya este marcado como borrado)
 ```
 
 Recursos anidados
