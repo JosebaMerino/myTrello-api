@@ -75,6 +75,9 @@ https://laravel-json-api.readthedocs.io/en/latest/features/soft-deletes/
 Cuales son los operadores de queries de MongoDB (Tambien de mongoose):
 https://docs.mongodb.com/manual/reference/operator/query-logical/
 
+APIS de Microsoft
+https://docs.microsoft.com/es-es/azure/architecture/best-practices/api-design
+
 
 
 Para otra vez va? Es demasiado para lo que quieres hacer
