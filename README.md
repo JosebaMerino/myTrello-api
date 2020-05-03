@@ -42,12 +42,21 @@ DELETE /recurso/:id -> Realiza un borrado logico del recurso
 DELETE /recurso/:id?fisical=true -> Realiza el borrado fisico del recurso (siempre que ya este marcado como borrado)
 ```
 
-Recursos anidados
+### Recursos anidados
+Los recursos anidados se manipularán usando los métodos descritos por JSON:API.
+#### Obtener los recursos anidados
+Devuelve los recursos anidados ya poblados.
 ```
 GET /recurso/:id/recursoAnidado -> Devuelve el recurso anidado o lista de recursos anidados poblada.
-POST /recurso/:id/recursoAnidado -> Crea el recurso y lo añade
+```
+
+#### Añadir recursos
+Añade un recurso ya creado a la lista de recursos anidados.
+```
+POST /recurso/:id/recursoAnidado
+```
+```
 DELETE /recurso/:id/recursoAnidado/:id -> Borra de forma logica el recurso anidado (se guarda la relación)
-DELETE /recurso/:id/recursoAnidado/:id?sure=true -> Realiza un borrado fisico del recurso anidado (borrando tambien la relación) .
 ```
 
 ## Morgan (JS)
@@ -78,7 +87,8 @@ https://docs.mongodb.com/manual/reference/operator/query-logical/
 APIS de Microsoft
 https://docs.microsoft.com/es-es/azure/architecture/best-practices/api-design
 
-
+Especificaciíon de JSON:API
+https://jsonapi.org/format/#document-resource-object-relationships
 
 Para otra vez va? Es demasiado para lo que quieres hacer
 
