@@ -95,3 +95,7 @@ Para otra vez va? Es demasiado para lo que quieres hacer
 HAL
 https://en.wikipedia.org/wiki/Hypertext_Application_Language
 https://programar.cloud/post/como-implementar-hateoas-en-tus-apis/
+
+
+Algo que implementa JSON:API
+http://dummy.restapiexample.com/
