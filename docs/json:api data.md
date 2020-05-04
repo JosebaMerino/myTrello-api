@@ -7,7 +7,7 @@ Parece que va a ser la solución correcta.
 Estructura básica de una respuesta JSON:
 
 ``` json
-{
+"data": {
   "type": "Tipo del objeto",
   "id": "id del objeto",
   "atributes": {
@@ -21,7 +21,7 @@ Estructura básica de una respuesta JSON:
 
 Un documento JSON más avanzado:
 ``` json
-{
+"data": {
   "type": "Tipo del objeto",
   "id": "id del objeto",
   "atributes": {
@@ -37,7 +37,7 @@ Un documento JSON más avanzado:
     // ... Metadatos del objeto
   }
 ```
-
+## Relationships
 
 
 
