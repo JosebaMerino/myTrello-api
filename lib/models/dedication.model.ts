@@ -24,5 +24,4 @@ DedicationSchema.pre('findOneAndUpdate', (next) => {
   next();
 });
 
-
 export default mongoose.model<IDedication>(modelName, DedicationSchema);
